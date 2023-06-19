@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sbm.admin.mapper.UsersMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sbm.admin.model.Users">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="email" property="email" />
+        <result column="email_verified_at" property="emailVerifiedAt" />
+        <result column="password" property="password" />
+        <result column="two_factor_secret" property="twoFactorSecret" />
+        <result column="two_factor_recovery_codes" property="twoFactorRecoveryCodes" />
+        <result column="two_factor_confirmed_at" property="twoFactorConfirmedAt" />
+        <result column="remember_token" property="rememberToken" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+</mapper>
