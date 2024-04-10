@@ -7,6 +7,8 @@ import com.sbm.admin.util.R;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 /**
  * <p>
  *  前端控制器
