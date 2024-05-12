@@ -1,9 +1,7 @@
 package com.sbm.admin.util;
 
-import cn.hutool.http.HttpStatus;
+import java.io.Serializable;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @Description
@@ -11,48 +9,114 @@ import java.util.Map;
  * @Date 2023/6/18
  */
 
-public class R extends HashMap<String, Object> {
+public class R<T> implements Serializable
+{
     private static final long serialVersionUID = 1L;
 
-    public R() {
-        put("code", 0);
-        put("msg", "success");
+    /** 成功 */
+    public static final int SUCCESS = 200;
+
+    /** 失败 */
+    public static final int FAIL = 500;
+
+    private int code;
+
+    private String msg;
+
+    private T data;
+
+    public static <T> R<T> ok()
+    {
+        return restResult(null, SUCCESS, "操作成功");
     }
 
-    public static R error() {
-        return error(HttpStatus.HTTP_INTERNAL_ERROR, "未知异常，请联系管理员");
+    public static <T> R<T> ok(T data)
+    {
+        return restResult(data, SUCCESS, "操作成功");
     }
 
-    public static R error(String msg) {
-        return error(HttpStatus.HTTP_INTERNAL_ERROR, msg);
+
+    public static <T> R<T> ok(String msg)
+    {
+        return restResult(null, SUCCESS, msg);
     }
 
-    public static R error(int code, String msg) {
-        R r = new R();
-        r.put("code", code);
-        r.put("msg", msg);
-        return r;
+    public static <T> R<T> ok(T data, String msg)
+    {
+        return restResult(data, SUCCESS, msg);
     }
 
-    public static R ok(String msg) {
-        R r = new R();
-        r.put("msg", msg);
-        return r;
+    public static <T> R<T> error()
+    {
+        return restResult(null, FAIL, "操作失败");
     }
 
-    public static R ok(Map<String, Object> map) {
-        R r = new R();
-        r.putAll(map);
-        return r;
+    public static <T> R<T> error(String msg)
+    {
+        return restResult(null, FAIL, msg);
     }
 
-    public static R ok() {
-        return new R();
+    public static <T> R<T> error(T data)
+    {
+        return restResult(data, FAIL, "操作失败");
     }
 
-    public R put(String key, Object value) {
-        super.put(key, value);
-        return this;
+    public static <T> R<T> error(T data, String msg)
+    {
+        return restResult(data, FAIL, msg);
     }
 
+    public static <T> R<T> error(int code, String msg)
+    {
+        return restResult(null, code, msg);
+    }
+
+    private static <T> R<T> restResult(T data, int code, String msg)
+    {
+        R<T> apiResult = new R<>();
+        apiResult.setCode(code);
+        apiResult.setData(data);
+        apiResult.setMsg(msg);
+        return apiResult;
+    }
+
+    public int getCode()
+    {
+        return code;
+    }
+
+    public void setCode(int code)
+    {
+        this.code = code;
+    }
+
+    public String getMsg()
+    {
+        return msg;
+    }
+
+    public void setMsg(String msg)
+    {
+        this.msg = msg;
+    }
+
+    public T getData()
+    {
+        return data;
+    }
+
+    public void setData(T data)
+    {
+        this.data = data;
+    }
+
+    public static <T> Boolean isError(R<T> ret)
+    {
+        return !isSuccess(ret);
+    }
+
+    public static <T> Boolean isSuccess(R<T> ret)
+    {
+        return R.SUCCESS == ret.getCode();
+    }
 }
