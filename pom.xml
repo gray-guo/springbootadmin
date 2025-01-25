@@ -15,6 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
+		<drools.version>7.59.0.Final</drools.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -118,6 +119,31 @@
 			<artifactId>mybatis-plus-join-boot-starter</artifactId>
 			<version>1.4.9</version>
 		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>org.drools</groupId>-->
+<!--			<artifactId>drools-spring</artifactId>-->
+<!--			<version>${drools.version}</version>-->
+<!--		</dependency>-->
+
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-api</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-spring</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+
 
 	</dependencies>
 

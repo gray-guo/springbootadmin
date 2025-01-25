@@ -1,0 +1,8 @@
+import com.sbm.admin.pojo.MatchResult; 
+import com.sbm.admin.model.Rules; 
+rule "ksession-rules 1" 
+when
+    $matchresult: MatchResult(age == 25 && weight >= 100) 
+then 
+    $matchresult.setGroupId(1); 
+end
